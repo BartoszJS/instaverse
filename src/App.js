@@ -1,10 +1,16 @@
 import React from 'react';
+import { Layout, Image, Typography} from "antd";
+import Logo from "./images/instaverse.png"
+const {Title} = Typography;
+const {Header, Footer} = Layout;
 
 const App = () => {
     return (
-        <div>
-            <h1>hi there!</h1>
-        </div>
+       <Layout>
+            <Header>
+                <Image width='45' preview='false' src={Logo} />
+            </Header>
+       </Layout>
     )
 }
 
