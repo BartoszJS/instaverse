@@ -6,7 +6,7 @@ const styles = {
     },
     formCard: {
       width: 390,
-      position: "relative",
+      position: "fixed",
       margin: "30px 10px",
     },
   };

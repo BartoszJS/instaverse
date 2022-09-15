@@ -5,6 +5,7 @@ import styles from './styles';
 import moment from 'moment';
 
 
+
 const {Meta} = Card;
 const {Link, Paragraph, Text} = Typography;
 function Story({story}) {

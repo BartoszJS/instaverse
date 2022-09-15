@@ -3,6 +3,7 @@ import { Layout, Image, Typography} from "antd";
 import Logo from "./images/instaverse.png"
 import Home from './components/Home';
 import styles from './styles';
+
 const {Title} = Typography;
 const {Header, Footer} = Layout;
 
