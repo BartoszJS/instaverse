@@ -15,6 +15,8 @@ function StoryForm({selectedId, setSelectedId}) {
     selectedId ? 
     dispatch(updateStory(selectedId,formValues)) : 
     dispatch(createStory(formValues));
+
+    reset();
   };
 
   useEffect(() => {
@@ -23,12 +25,17 @@ function StoryForm({selectedId, setSelectedId}) {
     }
   }, [story, form]);
 
+  const reset = () => {
+    form.resetFields();
+    setSelectedId(null);
+  }
+
   return (
     <Card 
       style={styles.formCard}
       title={
         <Title level={4}  style={styles.formTitle} >
-
+          {selectedId ? "Editing" : "Share"} a story
         </Title>
       }>
         
@@ -73,6 +80,25 @@ function StoryForm({selectedId, setSelectedId}) {
                 Share
               </Button>
             </Form.Item>
+
+
+            { !selectedId ? null :
+              <Form.Item 
+              wrapperCol={{
+                span:16,
+                offset: 6
+              }}>
+              <Button
+                type="primary"
+                block
+                htmlType='button'    
+                danger
+                onClick={reset}
+              >
+                Discard
+              </Button>
+            </Form.Item>
+            }
 
         </Form>
     </Card>

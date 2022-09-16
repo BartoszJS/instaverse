@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import { Card, Tooltip, Typography, Image } from "antd";
 import { EditOutlined, DeleteTwoTone, HeartTwoTone } from "@ant-design/icons";
+import { useDispatch } from 'react-redux';
 import styles from './styles';
 import moment from 'moment';
+import {deleteStory,likeStory} from '../../actions/stories'
 
 
 
@@ -10,6 +12,7 @@ const {Meta} = Card;
 const {Link, Paragraph, Text} = Typography;
 
 function Story({story, setSelectedId}) {
+  const dispatch = useDispatch();
   const [expand, setExpand] = useState(true);
 
   return (
@@ -22,7 +25,7 @@ function Story({story, setSelectedId}) {
           placement='top'
           title='Like'
           color='magenta'
-          onClick={() => {}}
+          onClick={() => { dispatch(likeStory(story._id))}}
         >
           <HeartTwoTone twoToneColor="magenta"/>
           &nbsp; {story.likes} &nbsp;
@@ -40,7 +43,7 @@ function Story({story, setSelectedId}) {
         placement='top'
         title='Delete'
         color='red'>
-        <DeleteTwoTone twoToneColor="red" onClick={() => {}} />
+        <DeleteTwoTone twoToneColor="red" onClick={() => dispatch(deleteStory(story._id))} />
       </Tooltip>
       
     ]}
