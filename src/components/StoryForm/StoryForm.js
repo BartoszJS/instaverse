@@ -1,18 +1,28 @@
-import React from 'react';
-import {useDispatch} from "react-redux";
+import React , {useEffect} from 'react';
+import {useDispatch,useSelector} from "react-redux";
 import { Card, Form, Input, Typography, Button } from "antd";
 import FileBase64 from "react-file-base64";
 import styles from './styles';
-import { createStory } from '../../actions/stories';
+import { createStory, updateStory } from '../../actions/stories';
 
 const {Title} = Typography;
 
-function StoryForm() {
+function StoryForm({selectedId, setSelectedId}) {
   const dispatch = useDispatch();
+  const story = useSelector((state) => selectedId ? state.stories.find(story => story._id === selectedId) : null);
   const [form] = Form.useForm();
   const onSubmit = (formValues) => {
+    selectedId ? 
+    dispatch(updateStory(selectedId,formValues)) : 
     dispatch(createStory(formValues));
   };
+
+  useEffect(() => {
+    if(story){
+      form.setFieldsValue(story);
+    }
+  }, [story, form]);
+
   return (
     <Card 
       style={styles.formCard}
