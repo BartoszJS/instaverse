@@ -7,3 +7,6 @@ export const createStory = async(story) => axios.post(url, story);
 export const updateStory = async(id,story) => axios.patch(`${url}/${id}`, story);
 export const deleteStory = async(id) => axios.delete(`${url}/${id}`);
 export const likeStory = async(id) => axios.patch(`${url}/${id}/likeStory`);
+
+export const login = async (formValues) => axios.post("/user/login", formValues);
+export const signup = async (formValues) => axios.post("/user/signup", formValues);
