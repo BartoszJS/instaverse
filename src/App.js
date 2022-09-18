@@ -1,23 +1,25 @@
 import React from 'react';
-import { Layout, Image, Typography} from "antd";
-import Logo from "./images/instaverse.png"
+import { Layout } from "antd";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './components/Home';
 import styles from './styles';
+import AppBar from './components/AppBar/AppBar';
+import AuthForm from './components/AuthForm';
 
-const {Title} = Typography;
-const {Header, Footer} = Layout;
+const {Footer} = Layout;
 
 const App = () => {
     return (
-       <Layout style={styles.layout}>
-            <Header style={styles.header}>
-                <Image style={styles.image} width='45' preview='false' src={Logo} />
-                &nbsp;
-                <Title style={styles.title}> Instaverse </Title>
-            </Header>
-            <Home />
-            <Footer style={styles.footer}> 2021 Instaverse</Footer>
-       </Layout>
+        <BrowserRouter>
+            <Layout style={styles.layout}>
+                    <AppBar />
+                    <Routes>
+                        <Route path='/' element={ <Home />} />
+                        <Route path='/authform' element={ <AuthForm/>} />
+                    </Routes>
+                    <Footer style={styles.footer}> 2021 Instaverse</Footer>
+            </Layout>
+       </BrowserRouter>
     )
 }
 
