@@ -4,6 +4,7 @@ import { Card, Form, Input, Typography, Button } from "antd";
 import FileBase64 from "react-file-base64";
 import styles from './styles';
 import { createStory, updateStory } from '../../actions/stories';
+import {Link} from 'react-router-dom';
 
 const {Title} = Typography;
 
@@ -11,10 +12,13 @@ function StoryForm({selectedId, setSelectedId}) {
   const dispatch = useDispatch();
   const story = useSelector((state) => selectedId ? state.stories.find(story => story._id === selectedId) : null);
   const [form] = Form.useForm();
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const username = user?.result?.username;
+
   const onSubmit = (formValues) => {
     selectedId ? 
-    dispatch(updateStory(selectedId,formValues)) : 
-    dispatch(createStory(formValues));
+    dispatch(updateStory(selectedId,{ ...formValues, username })) : 
+    dispatch(createStory({ ...formValues, username }));
 
     reset();
   };
@@ -28,6 +32,20 @@ function StoryForm({selectedId, setSelectedId}) {
   const reset = () => {
     form.resetFields();
     setSelectedId(null);
+  }
+
+  if (!user) {
+    return (
+      <Card style={styles.formCard}>
+        <Title level={4}>
+          <span style={styles.formTitle}>  
+            Welcome!
+          </span> <br />
+          <Link to='/authform'>Log in</Link> or <Link to='/authform'>register</Link> to share your stories.
+        </Title>
+
+      </Card>
+    )
   }
 
   return (
@@ -46,10 +64,8 @@ function StoryForm({selectedId, setSelectedId}) {
           layout="horizontal"
           size="middle"
           onFinish={onSubmit}
-          >
-            <Form.Item name="username" label="Username" rules={[{required: true}]}>
-              <Input allowClear />
-            </Form.Item>
+        >
+            
             <Form.Item name="caption" label="Caption" rules={[{required: true}]}>
               <Input.TextArea allowClear autosize={{ minRows:2, maxRows:6 }} />
             </Form.Item>

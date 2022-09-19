@@ -7,7 +7,7 @@ const styles = {
       textAlign: "center",
       fontSize: "3rem",
       background:
-        "linear-gradient(90deg, rgba(246,83,39,1) 0%, rgba(147,27,252,.95) 50%, rgba(246,83,39,1) 100%)",
+      "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0,0,0,1) 100%)",
       height: "5rem",
       display: "flex",
       justifyContent: "center",
