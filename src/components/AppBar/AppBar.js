@@ -23,7 +23,9 @@ export default function AppBar() {
 
         if (token) {
             const decodedToken = decode(token);
-            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+            if (decodedToken.exp * 1000 < new Date().getTime()) {
+                logout();
+            }
         }
 
         setUser(JSON.parse(localStorage.getItem("profile")));
@@ -41,7 +43,7 @@ export default function AppBar() {
                 <div style={styles.homeLink}>
                     <Image  style={styles.image} preview={false} src={Logo} width={45} />
                     &nbsp;
-                    <Title  style={styles.title}>Instaverse</Title>
+                    <Title  style={styles.title}>E-Paprykarz</Title>
                 </div>
             </Link>
             {!user ? (
